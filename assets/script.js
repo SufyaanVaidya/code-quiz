@@ -37,3 +37,11 @@ function showQuestion(question) {
     })
   
 }
+
+function resetState() {
+    nextButton.classList.add("hide")
+    while (ansButtonEl.firstChild) {
+        ansButtonEl.removeChild
+        (ansButtonEl.firstChild)
+    }
+}
