@@ -16,3 +16,24 @@ currentQuestionIndex = 0
 questionContainer.classList.remove("hide")
 setNextQuestion()
 }
+
+function setNextQuestion() {
+    resetState()
+    showQuestion(shuffledQuestions[currentQuestionIndex])
+
+}
+
+function showQuestion(question) {
+    questionEl.innerText = question.question
+    question.answers.forEach(answer => {
+      const button = document.createElement('button')
+      button.innerText = answer.text
+      button.classList.add('btn')
+      if (answer.correct) {
+        button.dataset.correct = answer.correct
+      }
+      button.addEventListener('click', selectAnswer)
+      ansButtonEl.appendChild(button)
+    })
+  
+}
