@@ -8,17 +8,6 @@
     --hue-correct: 145;
     --hue-wrong: 0;
 }
-header {
-    display: block;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    background-image: url(https://cdn.mos.cms.futurecdn.net/9QTpESGBXa32D29J77VR3d.jpg);
-    text-align: center;
-    height: 100px;
-    color: white;
-}
-
 
 body {
     --hue: var(--hue-neutral);
@@ -32,8 +21,9 @@ body {
     background-color: hsl(var(--hue), 100%, 20%);
 }
 
-#counter {
+.timer {
     padding-bottom: 70px;
+    text-align: center;
 }
 
 body.correct {

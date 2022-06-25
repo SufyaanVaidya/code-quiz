@@ -4,30 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./assets/style.css" rel="stylesheet">
+    <link href="assets/style.css" rel="stylesheet">
     <title>My Code Quiz</title>
 </head>
 <body>
-    <header>
-        <h1>Code Quiz</h1>
-    </header>
+    <a href="Highscores.html"> See Highscores</a>
 
-<div class="quiz">
-    <div id="counter">Time: </div>
-    <div class="hide" id="container">
-        <div id="question">Question</div>
-        <div id="choices" class="btn-grid">
-            <button class="btn">Answer 1</button>
-            <button class="btn">Answer 2</button>
-            <button class="btn">Answer 3</button>
-            <button class="btn">Answer 4</button>
-        </div>
-    </div>
-    <div class="controls">
-        <button id="start-btn" class="start-btn btn">Begin</button>
-        <button id="next-btn" class="next-btn btn hide">Next</button>
+<div id="quiz">
+    <div id="timer"></div>
+    <div id="questionsdiv">
+        <h1>Coding Quiz</h1>
+        <ul id="choicesul"></ul>
+        <button id="start">Begin</button>
     </div>
 </div>
-</body>
 <script src="./assets/script.js"></script>
+</body>
 </html>

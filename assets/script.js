@@ -1,5 +1,5 @@
 const startButton = document.getElementById("start-btn")
-const nextButton = document.getElementById("next-btn")
+
 const questionContainer = document.getElementById("container")
 const questionEl = document.getElementById("question")
 const ansButtonEl = document.getElementById("choices")
@@ -7,7 +7,7 @@ const ansButtonEl = document.getElementById("choices")
 let shuffledQuestions, currentQuestionIndex
 
 startButton.addEventListener("click", startGame)
-nextButton.addEventListener("click", () => {
+startButton.addEventListener("click", () => {
     currentQuestionIndex++
     setNextQuestion()
 })
@@ -63,6 +63,7 @@ function selectAnswer(e) {
     } else {
         startButton.innerText = "Restart"
         startButton.classList.remove("hide")
+
     }
 }
 
@@ -72,13 +73,13 @@ function setStatusClass(element, correct) {
         element.classList.add("correct")
     } else {
         element.classList.add("wrong")
+
     }
 }
 function clearStatusClass(element) {
     element.classList.remove("correct")
     element.classList.remove("wrong")
 }
-
 const questions = [
     {
         question: "What are the identifiers called that cannot be used as variables or function names?",
