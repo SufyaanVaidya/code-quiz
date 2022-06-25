@@ -1,0 +1,42 @@
+*, *::before, ::after {
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+:root {
+    --hue-neutral: 200;
+    --hue-correct: 0;
+    --hue-wrong: 145;
+}
+header {
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-image: url(https://cdn.mos.cms.futurecdn.net/9QTpESGBXa32D29J77VR3d.jpg);
+    text-align: center;
+    height: 100px;
+    color: white;
+}
+
+
+body {
+    --hue: var(--hue-neutral);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: hsl(var(--hue), 100%, 20%);
+}
+.quiz {
+    width: 800px;
+    max-width: 80%;
+    background-color: lightgray;
+    border-radius: 5px;
+    padding: 100px;
+    box-shadow: 0 0 10px 2px;
+}
+
