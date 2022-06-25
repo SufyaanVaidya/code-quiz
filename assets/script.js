@@ -45,3 +45,12 @@ function resetState() {
         (ansButtonEl.firstChild)
     }
 }
+
+function selectAnswer() {
+    const selectedButton = e.target
+    const correct = selectedButton.dataset.correct
+    setStatusClass(document.body, correct)
+    Array.from(ansButtonEl.children).forEach(button => {
+        setStatusClass(button, button.dataset.correct)
+    })
+}
