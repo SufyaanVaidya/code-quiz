@@ -5,8 +5,8 @@
 
 :root {
     --hue-neutral: 200;
-    --hue-correct: 0;
-    --hue-wrong: 145;
+    --hue-correct: 145;
+    --hue-wrong: 0;
 }
 header {
     display: block;
@@ -31,6 +31,19 @@ body {
     align-items: center;
     background-color: hsl(var(--hue), 100%, 20%);
 }
+
+#counter {
+    padding-bottom: 70px;
+}
+
+body.correct {
+    --hue: var(--hue-correct)
+}
+
+body.wrong {
+    --hue: var(--hue-wrong)
+}
+
 .quiz {
     width: 800px;
     max-width: 80%;
