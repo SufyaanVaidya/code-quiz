@@ -54,3 +54,15 @@ function selectAnswer() {
         setStatusClass(button, button.dataset.correct)
     })
 }
+
+const questions = [
+    {
+        question: "What are the identifiers called that cannot be used as variables or function names?",
+        answers: [
+            {text: "Reserved Words", correct: true  },
+            {text: "Constants", correct: false  },
+            {text: "Concrete Terms", correct: false  },
+            {text: "Favorites", correct: false  }
+        ]
+    }
+]
