@@ -1,23 +1,105 @@
-<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/style.css">
+    <title>Javascript Quiz</title>
+</head>
+
+<body>
+    <header>
+        <a id=leaderboard>Highscores</a> 
+        <time>Time: <span id="timer"></span></time>
+    </header>
+
+    <main>
+        <div id=quiz class="box">
+            <h2 id=quiz-title>Coding Quiz</h2>
+            <button id=begin-button class="button">Begin</button>
+        </div>
+
+        <div hidden id=question-box class="box">
+
+            <h2 id=question-text></h2>
+
+            <div id=quiz-options>
+                <button id=options0 class="button option-button"></button>
+                <button id=options1 class="button option-button"></button>
+                <button id=options2 class="button option-button"></button>
+                <button id=options3 class="button option-button"></button>
+            </div>
+
+            <div id=results>
+                <hr>
+                <p id=results-text></p>
+            </div>
+
+        </div>
+
+        <div hidden id=score-box class="box">
+            <h2>You Finished</h2>
+            <p>Your final score is <span id=score></span>.</p>
+            <form class="inline" id="submission">
+                  <label for="name">Enter Your Name: </label>
+                  <input type="text" id="initials">
+                  <button id="finish" class="button">Finish</button>
+            </form>
+        </div>
+
+        <div hidden id=leaderboard-box class="box">
+            <h2>Highscores</h2>
+            <ol id="highscore-list">
+            </ol>
+            <div class="inline-button">
+                <button id="go-back" class="button">Go Back</button>
+                <button id="clear-text" class="button">Clear Highscores</button>
+            </div>
+        </div>
+
+    </main>
+    
+    <script src="./assets/script.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="assets/style.css" rel="stylesheet">
+    <link href="./assets/style.css" rel="stylesheet">
     <title>My Code Quiz</title>
 </head>
 <body>
-    <a href="Highscores.html"> See Highscores</a>
+    <header>
+        <h1>Code Quiz</h1>
+    </header>
 
-<div id="quiz">
-    <div id="timer"></div>
-    <div id="questionsdiv">
-        <h1>Coding Quiz</h1>
-        <ul id="choicesul"></ul>
-        <button id="start">Begin</button>
+<div class="quiz">
+    <div class="timer">
+    <div class="time_line"></div>
+    <div class="hide" id="container">
+        <div id="question">Question</div>
+        <div id="choices" class="btn-grid">
+            <button class="btn">Answer 1</button>
+            <button class="btn">Answer 2</button>
+            <button class="btn">Answer 3</button>
+            <button class="btn">Answer 4</button>
+        </div>
+    </div>
+    <div class="controls">
+        <button id="start-btn" class="start-btn btn">Begin</button>
     </div>
 </div>
-<script src="./assets/script.js"></script>
 </body>
-</html>
+<script src="./assets/script.js"></script>
+</html> -->

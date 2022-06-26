@@ -1,4 +1,132 @@
-*, *::before, ::after {
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    background-image: url(https://cdn.mos.cms.futurecdn.net/9QTpESGBXa32D29J77VR3d.jpg);
+    color: #ffffff;
+    padding: 3vh;
+    height: 100px;
+  }
+  
+
+
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #ffffff;
+    margin: 0px;
+  }
+  
+
+  
+  time {
+    min-width: 85px;
+  }
+  
+  
+  main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 50px;
+    box-shadow: 0 0 10px 2px;
+    width: 800px;
+    max-width: 80%;
+    margin-left: 250px;
+  }
+  
+  
+  .button {
+    display: block;
+    color: #ffffff;
+    background-color:navy;
+    padding: 2vh;
+    border-radius: 8px;
+    border: none;
+  }
+  
+  .inline-button {
+    display: inline-flex;
+  }
+  
+  
+  .box {
+    max-width: 80%;
+    margin-top: 15vh;
+    border: solid;
+    border-width: 2px;
+    padding: 5vw;
+    border-radius: 30px;
+    border-color: lightgray;
+    box-shadow: 10px 5px 5px lightgray;
+  }
+  
+  
+  #start-screen {
+    display: inline;
+    text-align: center;
+  }
+  
+  
+  
+  .option-button {
+    width: 100%;
+    text-align: left;
+    margin: 5px;
+  }
+  
+  #results {
+    display: none;
+  }
+  
+
+  
+  .inline{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  
+  #name {
+    width: 25%;
+    margin: 8px;
+    padding: 1vh;
+  }
+  
+
+  
+  #go-back {
+    margin-right: 8px;
+  }
+  
+  .highscore-list {
+    padding-inline-start: 20px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* *, *::before, ::after {
     box-sizing: border-box;
     font-family: 'Courier New', Courier, monospace;
 }
@@ -8,6 +136,17 @@
     --hue-correct: 145;
     --hue-wrong: 0;
 }
+header {
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-image: url(https://cdn.mos.cms.futurecdn.net/9QTpESGBXa32D29J77VR3d.jpg);
+    text-align: center;
+    height: 100px;
+    color: white;
+}
+
 
 body {
     --hue: var(--hue-neutral);
@@ -73,7 +212,7 @@ body.wrong {
     color: black;
 }
 
-.start-btn, .next-btn {
+.start-btn{
     font-size: 1.5rem;
     font-weight: bold;
     padding: 10px 20px;
@@ -87,4 +226,4 @@ body.wrong {
 
 .hide {
     display: none;
-}
+} */
