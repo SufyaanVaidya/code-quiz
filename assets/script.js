@@ -1,126 +1,237 @@
-const startButton = document.getElementById("start-btn")
-const questionContainer = document.getElementById("container")
-const questionEl = document.getElementById("question")
-const ansButtonEl = document.getElementById("choices")
+const startCard = document.querySelector("#start-card");
+const questionCard = document.querySelector("#question-container");
+const scoreCard = document.querySelector("#score-card");
+const leaderboardCard = document.querySelector("#leaderboard-card");
+const resultDiv = document.querySelector("#result-pick");
+const resultText = document.querySelector("#result-text");
+const timeDisplay = document.querySelector("#time");
+const score = document.querySelector("#score");
+const submitButton = document.querySelector("#publish-button");
+const inputElement = document.querySelector("#name");
+const leaderboardLink = document.querySelector("#leaderboard-link");
 
 
-let shuffledQuestions, currentQuestionIndex
+  leaderboardLink.addEventListener("click", showLeaderboard);
+  leaderboardLink.addEventListener("click", showLeaderboard);
+  document.querySelector("#start-button").addEventListener("click", startQuiz);
+  document.querySelector("#quiz-options").addEventListener("click", checkAnswer);
+  submitButton.addEventListener("click", storeScore);
 
-startButton.addEventListener("click", startGame)
-ansButtonEl.addEventListener("click", function(){
+  var intervalID;
+  var time;
+  var currentQuestion;
 
-})
 
-function startGame() {
-console.log("started")
-startButton.classList.add("hide")
-shuffledQuestions = questions.sort(() => Math.random() - .5)
-currentQuestionIndex = 0
-questionContainer.classList.remove("hide")
-setNextQuestion()
-}
+  function hideCards() {
+    startCard.setAttribute("hidden", true);
+    questionCard.setAttribute("hidden", true);
+    scoreCard.setAttribute("hidden", true);
+    leaderboardCard.setAttribute("hidden", true);
+  }
 
-function setNextQuestion() {
-    resetState()
-    showQuestion(shuffledQuestions[currentQuestionIndex])
-
-}
-
-function showQuestion(question) {
-    questionEl.innerText = question.question
-    question.answers.forEach(answer => {
-      const button = document.createElement('button')
-      button.innerText = answer.text
-      button.classList.add('btn')
-      if (answer.correct) {
-        button.dataset.correct = answer.correct
-      }
-      button.addEventListener('click', selectAnswer)
-      ansButtonEl.appendChild(button)
-    })
   
-}
+ 
+  function hideResultText() {
+    resultDiv.style.display = "none";
+  }
+  
+ 
+  
+  function startQuiz() {
+    hideCards();
+    questionCard.removeAttribute("hidden");
+    currentQuestion = 0;
+    displayQuestion();
+    time = questions.length * 10;
+    intervalID = setInterval(countdown, 1000);
+    displayTime();
+  }
 
-function resetState() {
-    clearStatusClass(document.body)
-    while (ansButtonEl.firstChild) {
-        ansButtonEl.removeChild
-        (ansButtonEl.firstChild)
+  function displayQuestion() {
+    let question = questions[currentQuestion];
+    let options = question.options;
+    let h2QuestionElement = document.querySelector("#question-text");
+    h2QuestionElement.textContent = question.questionText;
+    for (let i = 0; i < options.length; i++) {
+      let option = options[i];
+      let optionButton = document.querySelector("#option" + i);
+      optionButton.textContent = option;
     }
-}
+  }
 
-function selectAnswer(e) {
-    const selectedButton = e.target
-    const correct = selectedButton.dataset.correct
-    setStatusClass(document.body, correct)
-    Array.from(ansButtonEl.children).forEach(button => {
-        setStatusClass(button, button.dataset.correct)
-    })
-    if (shuffledQuestions.length > currentQuestionIndex + 1) {
+  function storeScore(event) {
+    event.preventDefault();
+    if (!inputElement.value) {
+      alert("You must enter initials.");
+      return;
+    }
+    let leaderboardItem = {
+      initials: inputElement.value,
+      score: time,
+    };
+    updateStoredLeaderboard(leaderboardItem);
+    hideCards();
+    leaderboardLink.removeAttribute("hidden");
+    renderLeaderboard();
+  }
+  
+  
+  function countdown() {
+    time--;
+    displayTime();
+    if (time < 1) {
+      endQuiz();
+    }
+  }
+  
+ 
+  function displayTime() {
+    timeDisplay.textContent = time;
+  }
+  
+
+ 
+  
+  
+  
+  function optionIsCorrect(optionButton) {
+    return optionButton.textContent === questions[currentQuestion].answer;
+  }
+  
+ 
+  function checkAnswer(eventObject) {
+    let optionButton = eventObject.target;
+    resultDiv.style.display = "block";
+    if (optionIsCorrect(optionButton)) {
+      resultText.textContent = "Correct!";
+      setTimeout(hideResultText, 1000);
     } else {
-        startButton.innerText = "Restart"
-        startButton.classList.remove("hide")
+      resultText.textContent = "Wrong!";
+      setTimeout(hideResultText, 1000);
+      if (time >= 10) {
+        time = time - 10;
+        displayTime();
+      } else {
+        time = 0;
+        displayTime();
+        endQuiz();
+      }
     }
-}
 
-function setStatusClass(element, correct) {
-    clearStatusClass(element)
-    if (correct) {
-        element.classList.add("correct")
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      displayQuestion();
     } else {
-        element.classList.add("wrong")
+      endQuiz();
     }
+  }
+  
+
+  function endQuiz() {
+  clearInterval(intervalID);
+  hideCards();
+  scoreCard.removeAttribute("hidden");
+  score.textContent = time;
 }
-function clearStatusClass(element) {
-    element.classList.remove("correct")
-    element.classList.remove("wrong")
-}
+  
+  
 
 
-const questions = [
-    {
-        question: "What are the identifiers called that cannot be used as variables or function names?",
-        answers: [
-            {text: "Reserved Words", correct: true  },
-            {text: "Constants", correct: false  },
-            {text: "Concrete Terms", correct: false  },
-            {text: "Favorites", correct: false  }
-        ]
-    },
-    {
-        question: "This is what you call the guide that defines coding conventions for all projects.",
-        answers: [
-            {text: "Developer's reference", correct: false  },
-            {text: "Coding dictionary", correct: false  },
-            {text: "Main textbook", correct: false  },
-            {text: "Style guide", correct: true  }
-        ]
-    },
-    {
-        question: "In JavaScript, what is used in conjunction with HTML to “react” to certain elements?",
-        answers: [
-            {text: "RegExp", correct: false  },
-            {text: "Events", correct: true  },
-            {text: "Condition", correct: false  },
-            {text: "Boolean", correct: false  }
-        ]
-    },
-    {
-        question: "What is the element used - and hidden - in code that explains things and makes the content more readable?",
-        answers: [
-            {text: "Quotations", correct: false  },
-            {text: "Notes", correct: false  },
-            {text: "Comments", correct: true  },
-            {text: "Comparisons", correct: false  }
-        ]
-    },
-    {
-        question: "What is the element called that is used to describe the set of variables, objects, and functions you explicitly have access to?",
-        answers: [
-            {text: "Range", correct: false  },
-            {text: "Restriction", correct: false  },
-            {text: "Output Level", correct: false  },
-            {text: "Scope", correct: true  }
-        ]
+  
+  
+  
+  function updateStoredLeaderboard(leaderboardItem) {
+    let leaderboardArray = getLeaderboard();
+    leaderboardArray.push(leaderboardItem);
+    localStorage.setItem("leaderboardArray", JSON.stringify(leaderboardArray));
+  }
+  
+  
+
+  function getLeaderboard() {
+    let storedLeaderboard = localStorage.getItem("leaderboardArray");
+    if (storedLeaderboard !== null) {
+      let leaderboardArray = JSON.parse(storedLeaderboard);
+      return leaderboardArray;
+    } else {
+      leaderboardArray = [];
     }
-]
+    return leaderboardArray;
+  }
+  
+
+  function renderLeaderboard() {
+    let sortedLeaderboardArray = sortLeaderboard();
+    const highscoreList = document.querySelector("#highscore-list");
+    highscoreList.innerHTML = "";
+    for (let i = 0; i < sortedLeaderboardArray.length; i++) {
+      let leaderboardEntry = sortedLeaderboardArray[i];
+      let newListItem = document.createElement("li");
+      newListItem.textContent =
+        leaderboardEntry.initials + " - " + leaderboardEntry.score;
+      highscoreList.append(newListItem);
+    }
+  }
+  
+
+  function sortLeaderboard() {
+    let leaderboardArray = getLeaderboard();
+    if (!leaderboardArray) {
+      return;
+    }
+  
+    leaderboardArray.sort(function (a, b) {
+      return b.score - a.score;
+    });
+    return leaderboardArray;
+  }
+  
+  
+  function clearHighscores() {
+    localStorage.clear();
+    renderLeaderboard();
+  }
+  
+  function returnToStart() {
+    hideCards();
+    beginQuiz.removeAttribute("hidden");
+  }
+  
+
+  function showLeaderboard() {
+    hideCards();
+    leaderboard.removeAttribute("hidden");
+    clearInterval(intervalID);
+    time = undefined;
+    displayTime();
+    renderLeaderboard();
+  }
+
+  const questions = [
+    {
+      questionText: "What are the identifiers called that cannot be used as variables or function names?",
+      options: ["Reserved Words", "Constants", "Concrete Terms", "Favorites"],
+      answer: "Reserved Words",
+    },
+    {
+      questionText: "This is what you call the guide that defines coding conventions for all projects __",
+      options: [
+        "Developer's reference", "Coding dictionary", "Main textbook", "Style guide",],
+      answer: "Style guide",
+    },
+    {
+      questionText: "In JavaScript, what is used in conjunction with HTML to “react” to certain elements?",
+      options: ["RegExp", "Events", "Condition", "Boolean",],
+      answer: "Events",
+    },
+    {
+      questionText: "What is the element used - and hidden - in code that explains things and makes the content more readable?",
+      options: ["Quotations", "Notes", "Comments", "Comparisons",],
+      answer: "Comments",
+    },
+    {
+      questionText: "What is the element called that is used to describe the set of variables, objects, and functions you explicitly have access to?",
+      options: ["Range", "Restriction", "Output Level", "Scope",],
+      answer: "Scope",
+    },
+  ];
