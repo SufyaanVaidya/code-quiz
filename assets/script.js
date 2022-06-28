@@ -1,81 +1,106 @@
-const startCard = document.querySelector("#start-card");
-const questionCard = document.querySelector("#question-container");
-const scoreCard = document.querySelector("#score-card");
-const leaderboardCard = document.querySelector("#leaderboard-card");
-const resultDiv = document.querySelector("#result-pick");
-const resultText = document.querySelector("#result-text");
+// These are all of my querySelectors that target the html
+const startTest = document.querySelector("#quiz");
+const questionBox = document.querySelector("#question-container");
+const scoreBox = document.querySelector("#yourscores");
+const quizLeaderboard = document.querySelector("#lobbyleaderboard");
+const quizResults = document.querySelector("#resultchoices");
+const answerOptions = document.querySelector("#resultanswers");
 const timeDisplay = document.querySelector("#time");
 const score = document.querySelector("#score");
-const submitButton = document.querySelector("#publish-button");
+const publishButton = document.querySelector("#publish-button");
 const inputElement = document.querySelector("#name");
-const leaderboardLink = document.querySelector("#leaderboard-link");
+const leaderboardTitle = document.querySelector("#leaderboardlink");
+const backButton = document.querySelector("#back-button");
+const clearButton = document.querySelector("#clear-button");
 
-
-  leaderboardLink.addEventListener("click", showLeaderboard);
-  leaderboardLink.addEventListener("click", showLeaderboard);
-  document.querySelector("#start-button").addEventListener("click", startQuiz);
+// these are my eventlisteners that will allow the page to function when objects are clicked
+  leaderboardTitle.addEventListener("click", showLeaderboard);
+  leaderboardTitle.addEventListener("click", showLeaderboard);
+  document.querySelector("#beginbutton").addEventListener("click", startQuiz);
   document.querySelector("#quiz-options").addEventListener("click", checkAnswer);
-  submitButton.addEventListener("click", storeScore);
+  publishButton.addEventListener("click", storeScore);
+  backButton.addEventListener("click", returnToStart);
+  clearButton.addEventListener("click", clearHighscores);
 
+  // these are my variables that are created
   var intervalID;
   var time;
   var currentQuestion;
 
-
+// this function is hiding all the card/screens so they dont display at once
   function hideCards() {
-    startCard.setAttribute("hidden", true);
-    questionCard.setAttribute("hidden", true);
-    scoreCard.setAttribute("hidden", true);
-    leaderboardCard.setAttribute("hidden", true);
+    startTest.setAttribute("hidden", true);
+    questionBox.setAttribute("hidden", true);
+    scoreBox.setAttribute("hidden", true);
+    quizLeaderboard.setAttribute("hidden", true);
   }
 
   
- 
-  function hideResultText() {
-    resultDiv.style.display = "none";
+ // this function will hide your results/ the final message till you finish the quiz
+  function hideanswerOptions() {
+    quizResults.style.display = "none";
   }
   
  
-  
+  // this function will begin the quiz when the begin quiz is clicked
   function startQuiz() {
+    // this will hide all the cards when the quiz is started
     hideCards();
-    questionCard.removeAttribute("hidden");
+    // this is unhiding the questions/answers
+    questionBox.removeAttribute("hidden");
+    // this is stating the current question we are working on is 0
     currentQuestion = 0;
+    // this is calling on the function that will display a question from the questions array
     displayQuestion();
-    time = questions.length * 10;
+    // this is setting the time based on how many questions are gonna be asked
+    time = questions.length * 8;
+    // this is making the timer countdown by 1000ms or every 1 second
     intervalID = setInterval(countdown, 1000);
+    // this is calling on the function to display the time when the quiz starts
     displayTime();
   }
-
+// this function is displaying the first question in the array
   function displayQuestion() {
+    // creating values that target the question and places its value to the currentquestion
     let question = questions[currentQuestion];
+    // this is creating a value that target the arrray that contains the answers
     let options = question.options;
+    // this is creating a value that selects 11a target from the html to apply specific code to
     let h2QuestionElement = document.querySelector("#question-text");
+    // this is changing the text inside this targeted value to the question text state in js
     h2QuestionElement.textContent = question.questionText;
+    // this for loop is selecting the answers from the questions array
     for (let i = 0; i < options.length; i++) {
       let option = options[i];
       let optionButton = document.querySelector("#option" + i);
       optionButton.textContent = option;
     }
   }
-
+// this function is adding a score to the event
   function storeScore(event) {
+    // this is stopping the page from loading events default effects/values
     event.preventDefault();
+    //this is saying that if the user doesn't enter their name prompt them saying the must
     if (!inputElement.value) {
       alert("You must enter initials.");
       return;
     }
+    // this is creating a list with the name inputed and the score to show after the quiz
     let leaderboardItem = {
+      // this is saying to put the users input value in the initials spot
       initials: inputElement.value,
       score: time,
     };
+    // this is updating the list with the new list item if the test is taken again
     updateStoredLeaderboard(leaderboardItem);
+    // this is calling on the function that hides cards
     hideCards();
-    leaderboardLink.removeAttribute("hidden");
+    // this is removing the hidden attribute from the leaderboard
+    quizLeaderboard.removeAttribute("hidden");
     renderLeaderboard();
   }
   
-  
+  // this function is telling the quiz end when the time counted down to 0
   function countdown() {
     time--;
     displayTime();
@@ -84,7 +109,7 @@ const leaderboardLink = document.querySelector("#leaderboard-link");
     }
   }
   
- 
+ // this function is placing the time value into the proper text area
   function displayTime() {
     timeDisplay.textContent = time;
   }
@@ -93,31 +118,36 @@ const leaderboardLink = document.querySelector("#leaderboard-link");
  
   
   
-  
+  // this is saying that to determine if its correct it must equal the preset input in the option array
   function optionIsCorrect(optionButton) {
     return optionButton.textContent === questions[currentQuestion].answer;
   }
   
- 
+ // this function is being used to check and see if the answer is right or wrong
   function checkAnswer(eventObject) {
     let optionButton = eventObject.target;
-    resultDiv.style.display = "block";
+    // this is making the results appear together
+    quizResults.style.display = "block";
+    // this is saying that if the correct option is chosen then say correct and continue counting down
     if (optionIsCorrect(optionButton)) {
-      resultText.textContent = "Correct!";
-      setTimeout(hideResultText, 1000);
+      answerOptions.textContent = "Correct!";
+      setTimeout(hideanswerOptions, 1000);
     } else {
-      resultText.textContent = "Wrong!";
-      setTimeout(hideResultText, 1000);
+      // this is saying that if the input doesnt match the correct answer then respond wrong
+      answerOptions.textContent = "Wrong!";
+      setTimeout(hideanswerOptions, 1000);
+      // this is saying that if time is greater than or equal to 10 then subtract 10 from the time if the answer is wrong
       if (time >= 10) {
         time = time - 10;
         displayTime();
+        //this is saying that if the time reaches 0 then to end the quiz
       } else {
         time = 0;
         displayTime();
         endQuiz();
       }
     }
-
+// this is going through the questions array until there are no more if so then end the quiz
     currentQuestion++;
     if (currentQuestion < questions.length) {
       displayQuestion();
@@ -126,28 +156,42 @@ const leaderboardLink = document.querySelector("#leaderboard-link");
     }
   }
   
-
+// this function is stopping the countdown, hiding all the other screens and showing your score which is your time left
   function endQuiz() {
   clearInterval(intervalID);
   hideCards();
-  scoreCard.removeAttribute("hidden");
+  scoreBox.removeAttribute("hidden");
   score.textContent = time;
 }
   
-  
+  // this function is generating the leaderboard list
+function renderLeaderboard() {
+  let sortedLeaderboardArray = sortLeaderboard();
+  const highscoreList = document.querySelector("#highscore-list");
+  //this is turning the list into an empty string
+  highscoreList.innerHTML = "";
+  for (let i = 0; i < sortedLeaderboardArray.length; i++) {
+    let leaderboardEntry = sortedLeaderboardArray[i];
+    let newListItem = document.createElement("li");
+    // this is adding the inputted information that was converted to string to the list and adding them to the end of the list
+    newListItem.textContent =
+      leaderboardEntry.initials + " - " + leaderboardEntry.score;
+    highscoreList.append(newListItem);
+  }
+}
 
-
   
   
-  
+  // this function will take any user input string and adding it to an array
   function updateStoredLeaderboard(leaderboardItem) {
     let leaderboardArray = getLeaderboard();
     leaderboardArray.push(leaderboardItem);
+    // this is adding an array to the local storage
     localStorage.setItem("leaderboardArray", JSON.stringify(leaderboardArray));
   }
   
   
-
+// this function is retreiving the array from local storage and making it a returned array
   function getLeaderboard() {
     let storedLeaderboard = localStorage.getItem("leaderboardArray");
     if (storedLeaderboard !== null) {
@@ -159,45 +203,32 @@ const leaderboardLink = document.querySelector("#leaderboard-link");
     return leaderboardArray;
   }
   
-
-  function renderLeaderboard() {
-    let sortedLeaderboardArray = sortLeaderboard();
-    const highscoreList = document.querySelector("#highscore-list");
-    highscoreList.innerHTML = "";
-    for (let i = 0; i < sortedLeaderboardArray.length; i++) {
-      let leaderboardEntry = sortedLeaderboardArray[i];
-      let newListItem = document.createElement("li");
-      newListItem.textContent =
-        leaderboardEntry.initials + " - " + leaderboardEntry.score;
-      highscoreList.append(newListItem);
-    }
-  }
   
-
+//this function is saying that it will return nothing if the leaderboard array is empty
   function sortLeaderboard() {
     let leaderboardArray = getLeaderboard();
     if (!leaderboardArray) {
       return;
     }
-  
+  // this is sorting the scores in order
     leaderboardArray.sort(function (a, b) {
       return b.score - a.score;
     });
     return leaderboardArray;
   }
   
-  
+  // this is adding a function that clears the leaderboard array when the button is clicked
   function clearHighscores() {
     localStorage.clear();
     renderLeaderboard();
   }
-  
+  // this takes you back to the first screen/card when you click go back
   function returnToStart() {
     hideCards();
-    beginQuiz.removeAttribute("hidden");
+    startTest.removeAttribute("hidden");
   }
   
-
+// this function is to display the highscores list at any time when the option is selected
   function showLeaderboard() {
     hideCards();
     leaderboard.removeAttribute("hidden");
@@ -206,7 +237,7 @@ const leaderboardLink = document.querySelector("#leaderboard-link");
     displayTime();
     renderLeaderboard();
   }
-
+// these are my questions
   const questions = [
     {
       questionText: "What are the identifiers called that cannot be used as variables or function names?",

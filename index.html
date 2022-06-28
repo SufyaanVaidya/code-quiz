@@ -9,24 +9,25 @@
 
 <body>
         <header>
-            <a id=leaderboard-link>Highscores</a> 
+            <a id=leaderboardlink>Highscores</a> 
             
             <time>Time: <span id="time"></span></time>
         </header>
     
     <main>
-            <div id=start-card class="card">
+            <!-- this is what displays before the quiz begins -->
+          <div id=quiz class="card">
 
                 <h2 id=title>Code Quiz</h2>
                 
-                <button id=start-button class="button">Begin</button>
+                <button id=beginbutton class="button">Begin</button>
             
             </div>
-    
+            <!-- this is creating the question the text in it -->
             <div hidden id=question-container class="card">
     
                 <h2 id=question-text></h2>
-    
+                <!-- this is creating the answers options -->
                 <div id=quiz-options>
              
                     <button id=option0 class="button option-button"></button>
@@ -39,17 +40,17 @@
              
                 </div>
     
-                <div id=result-pick>
+                <div id=resultchoices>
              
                     <hr>
              
-                    <p id=result-text></p>
+                    <p id=resultanswers></p>
              
                 </div>
     
             </div>
-    
-            <div hidden id=score-card class="card">
+            <!-- this is displaying the scores -->
+            <div hidden id=yourscores class="card">
             
                 <h2>Your Finished.</h2>
             
@@ -68,9 +69,15 @@
             </div>
     
             
-            <div hidden id=leaderboard-card class="card">
+            <div hidden id=lobbyleaderboard class="card">
             
                 <h2>Highscores</h2>
+                <ol id="highscore-list">
+                </ol>
+                <div class="inline-buttons">
+                    <button id="back-button" class="button">Go Back</button>
+                    <button id="clear-button" class="button">Clear Highscores</button>
+                </div>
                 
         </div>
 

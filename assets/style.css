@@ -1,4 +1,4 @@
-  
+  /* this is styling the header and adding a n image */
   header {
     display: flex;
     justify-content: space-between;
@@ -10,7 +10,7 @@
   
 
 
-
+/* this is styling the body part of the page */
 body {
     font-family: 'Times New Roman', Times, serif;
     background-color: #ffffff;
@@ -23,7 +23,7 @@ body {
     min-width: 85px;
   }
   
-  
+  /* this is styling the main section inside the body */
   main {
     display: flex;
     align-items: center;
@@ -36,7 +36,7 @@ body {
     margin-left: 250px;
   }
   
-  
+  /* these are styling the button and the different card/pages */
   .button {
     display: block;
     color: #ffffff;
@@ -60,7 +60,7 @@ body {
   
   
   
-  
+  /* these are styling the classes and id's */
   
   .option-button {
     width: 100%;
