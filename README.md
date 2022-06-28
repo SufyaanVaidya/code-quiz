@@ -61,5 +61,4 @@ This page is a quiz i have created only containing quiestions about coding. In t
 
 ## License
 
-- This website has an MIT license 
-- (https://github.com/SufyaanVaidya/my-portfolio/blob/330eb6f89b0fdfadab58da23b8c37a80936f099c/LICENSE)
+- [This-website-has-an-MIT-license](https://github.com/SufyaanVaidya/code-quiz/blob/main/LICENSE)
